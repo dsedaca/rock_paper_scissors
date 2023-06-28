@@ -4,6 +4,8 @@ const scissors = 'Scissors';
 let playerChoice;
 let computerChoice;
 let result;
+let playerWin = 0;
+let computerWin = 0;
 
 function getComputerChoice () {
 
@@ -35,13 +37,17 @@ function playRound() {
         outcome = console.log('It\'s a Tie! You Both Chose ' + playerChoice + '!');
     } else if ((playerChoice === 'Rock' && computerChoice === 'Paper') || (playerChoice === 'Paper' && computerChoice === 'Scissors') || (playerChoice === 'Scissors' && computerChoice === 'Rock')) {
         outcome = console.log('You Lose! ' + computerChoice + ' beats ' + playerChoice + '!');
+        computerWin += 1;
     } else if ((playerChoice === 'Rock' && computerChoice === 'Scissors') || (playerChoice === 'Paper' && computerChoice === 'Rock') || (playerChoice === 'Scissors' && computerChoice === 'Paper')){
         outcome = console.log('You Win! ' + playerChoice + ' beats ' + computerChoice + '!');
+        playerWin += 1;
     } else {
         outcome = console.log(playerChoice + ' is not a valid decision!')
     }
 
     return outcome;
+    return playerWin;
+    return computerWin;
 }
 
 function game () {
@@ -50,6 +56,9 @@ function game () {
     console.log(playRound());
     console.log(playRound());
     console.log(playRound());
+
+    console.log('Player Wins: ' + playerWin);
+    console.log('Computer Wins: ' + computerWin);
 }
 
 game();
