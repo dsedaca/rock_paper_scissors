@@ -3,6 +3,7 @@ const paper = 'Paper';
 const scissors = 'Scissors';
 let playerChoice;
 let computerChoice;
+let result;
 
 function getComputerChoice () {
 
@@ -20,25 +21,35 @@ function getComputerChoice () {
     return Decision;
 }
 
-function playGame(player, computer) {
+function playRound() {
     let outcome;
+
+    computerChoice = getComputerChoice();
+
+    playerChoice = prompt('Choose Rock, Paper, or Scissors!', '');
+
+    playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase();
+
     
-    if (player === computer) {
-        outcome = console.log('It\'s a Tie! You Both Chose ' + player + '!');
-    } else if ((player === 'Rock' && computer === 'Paper') || (player === 'Paper' && computer === 'Scissors') || (player === 'Scissors' && computer === 'Rock')) {
-        outcome = console.log('You Lose! ' + computer + ' beats ' + player + '!');
+    if (playerChoice === computerChoice) {
+        outcome = console.log('It\'s a Tie! You Both Chose ' + playerChoice + '!');
+    } else if ((playerChoice === 'Rock' && computerChoice === 'Paper') || (playerChoice === 'Paper' && computerChoice === 'Scissors') || (playerChoice === 'Scissors' && computerChoice === 'Rock')) {
+        outcome = console.log('You Lose! ' + computerChoice + ' beats ' + playerChoice + '!');
+    } else if ((playerChoice === 'Rock' && computerChoice === 'Scissors') || (playerChoice === 'Paper' && computerChoice === 'Rock') || (playerChoice === 'Scissors' && computerChoice === 'Paper')){
+        outcome = console.log('You Win! ' + playerChoice + ' beats ' + computerChoice + '!');
     } else {
-        outcome = console.log('You Win! ' + player + ' beats ' + computer + '!');
+        outcome = console.log(playerChoice + ' is not a valid decision!')
     }
 
     return outcome;
 }
 
-computerChoice = getComputerChoice();
+function game () {
+    console.log(playRound());
+    console.log(playRound());
+    console.log(playRound());
+    console.log(playRound());
+    console.log(playRound());
+}
 
-playerChoice = prompt('Choose Rock, Paper, or Scissors!');
-
-playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase();
-
-
-console.log(playGame(playerChoice, computerChoice));
+game();
