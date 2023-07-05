@@ -1,11 +1,10 @@
-const rock = 'Rock';
-const paper = 'Paper';
-const scissors = 'Scissors';
 let playerChoice;
 let computerChoice;
-let result;
 let playerWin = 0;
 let computerWin = 0;
+const rock = document.querySelector('.rock');
+const paper = document.querySelector('.paper');
+const scissors = document.querySelector('.scissors');
 
 function getComputerChoice () {
 
@@ -13,52 +12,59 @@ function getComputerChoice () {
     let Decision;
 
     if (Choice === 1) {
-        Decision = rock;
+        Decision = "Rock";
     } else if (Choice === 2) {
-        Decision = paper;
+        Decision = "Paper";
     } else {
-        Decision = scissors;
+        Decision = "Scissors";
     }
 
     return Decision;
 }
 
-function playRound() {
-    let outcome;
+function playRound(playerChoice) {
 
     computerChoice = getComputerChoice();
-
-    playerChoice = prompt('Choose Rock, Paper, or Scissors!', '');
 
     playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase();
 
     
     if (playerChoice === computerChoice) {
-        outcome = console.log('It\'s a Tie! You Both Chose ' + playerChoice + '!');
+        result.textContent = `It''s a Tie! You Both Chose ${playerChoice}!`;
     } else if ((playerChoice === 'Rock' && computerChoice === 'Paper') || (playerChoice === 'Paper' && computerChoice === 'Scissors') || (playerChoice === 'Scissors' && computerChoice === 'Rock')) {
-        outcome = console.log('You Lose! ' + computerChoice + ' beats ' + playerChoice + '!');
+        result.textContent = `You Lose! ${computerChoice} beats ${playerChoice}!`;
         computerWin += 1;
-    } else if ((playerChoice === 'Rock' && computerChoice === 'Scissors') || (playerChoice === 'Paper' && computerChoice === 'Rock') || (playerChoice === 'Scissors' && computerChoice === 'Paper')){
-        outcome = console.log('You Win! ' + playerChoice + ' beats ' + computerChoice + '!');
-        playerWin += 1;
     } else {
-        outcome = console.log(playerChoice + ' is not a valid decision!')
+        result.textContent = `You Win! ${playerChoice} beats ${computerChoice}!`;
+        playerWin += 1;
     }
+    
+    total.textContent = '\nPlayer wins: ' + playerWin;
+    total.textContent += '\nComputer wins: ' + computerWin;
 
-    return outcome;
     return playerWin;
     return computerWin;
 }
 
-function game () {
-    console.log(playRound());
-    console.log(playRound());
-    console.log(playRound());
-    console.log(playRound());
-    console.log(playRound());
+const body = document.querySelector('body');
+const result = document.createElement('p');
+const total = document.createElement('p');
 
-    console.log('Player Wins: ' + playerWin);
-    console.log('Computer Wins: ' + computerWin);
-}
+result.classList.add('result');
+total.classList.add('total')
 
-game();
+body.appendChild(result);
+body.appendChild(total);
+
+rock.addEventListener('click', () => {
+    playRound('rock');
+});
+
+paper.addEventListener('click', () => {
+    playRound('paper');
+});
+
+scissors.addEventListener('click', () => {
+    playRound('scissors');
+});
+
