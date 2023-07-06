@@ -42,8 +42,36 @@ function playRound(playerChoice) {
     total.textContent = '\nPlayer wins: ' + playerWin;
     total.textContent += '\nComputer wins: ' + computerWin;
 
-    return playerWin;
-    return computerWin;
+    checkWins(playerWin, computerWin);
+    
+}
+
+function checkWins(player, computer) {    
+    if (player === 5) {
+        result.textContent = 'Congratulations! You won!';
+        resetGame();       
+    } else if (computer === 5) {
+        result.textContent = 'Sorry. You lost.';
+        resetGame();
+    } else {
+        return;
+    }
+}
+
+function resetGame() {
+    const restart = document.createElement('button');
+    
+    rock.remove();
+    paper.remove();
+    scissors.remove();
+
+    restart.classList.add('restart');
+    restart.textContent = 'Restart';
+    body.prepend(restart);
+
+    restart.addEventListener('click', () => {
+        location.reload();
+    })
 }
 
 const body = document.querySelector('body');
