@@ -8,26 +8,23 @@ const scissors = document.querySelector('.scissors');
 
 function getComputerChoice () {
 
-    let Choice = Math.floor(Math.random() * 3) + 1;
-    let Decision;
+    let choice = Math.floor(Math.random() * 3) + 1;
+    let decision;
 
-    if (Choice === 1) {
-        Decision = "Rock";
-    } else if (Choice === 2) {
-        Decision = "Paper";
+    if (choice === 1) {
+        decision = "Rock";
+    } else if (choice === 2) {
+        decision = "Paper";
     } else {
-        Decision = "Scissors";
+        decision = "Scissors";
     }
 
-    return Decision;
+    return decision;
 }
 
 function playRound(playerChoice) {
 
     computerChoice = getComputerChoice();
-
-    playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase();
-
     
     if (playerChoice === computerChoice) {
         result.textContent = `It''s a Tie! You Both Chose ${playerChoice}!`;
@@ -85,14 +82,14 @@ body.appendChild(result);
 body.appendChild(total);
 
 rock.addEventListener('click', () => {
-    playRound('rock');
+    playRound('Rock');
 });
 
 paper.addEventListener('click', () => {
-    playRound('paper');
+    playRound('Paper');
 });
 
 scissors.addEventListener('click', () => {
-    playRound('scissors');
+    playRound('Scissors');
 });
 
